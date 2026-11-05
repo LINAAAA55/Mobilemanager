@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -16,12 +17,29 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Log.d(tag, "onCreate call")
 
+        val listViewProducts: ListView = findViewById(R.id.listViewProducts)
+
+        val productList = listOf(
+            Product("Téléphone", R.drawable.ic_phone),
+            Product("Casque Bluetooth", R.drawable.ic_headphones),
+            Product("Montre connectée", R.drawable.ic_watch),
+            Product("Chargeur USB", R.drawable.ic_charger),
+            Product("Accessoires", R.drawable.ic_accessories),
+            Product("Cosmétiques", R.drawable.ic_cosmetics)
+        )
+
+        val adapter = ProductAdapter(this, productList)
+        listViewProducts.adapter = adapter
+
+        listViewProducts.setOnItemClickListener { _, _, position, _ ->
+            val selectedProduct = productList[position]
+            val message = "${getString(R.string.product_selected_prefix)}${selectedProduct.name}"
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
+
         val btnSuivant: Button = findViewById(R.id.btnSuivant)
         btnSuivant.setOnClickListener {
-            // Affichage du Toast
             Toast.makeText(this, getString(R.string.hello_toast), Toast.LENGTH_SHORT).show()
-
-            // Navigation vers ProfileActivity avec un Intent explicite
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
