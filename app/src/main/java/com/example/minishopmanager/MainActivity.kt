@@ -7,33 +7,37 @@ import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
     private val tag = "MainActivityLifecycle"
+    private lateinit var dbHelper: DBHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.d(tag, "onCreate call")
 
+        dbHelper = DBHelper(this)
+
         val listViewProducts: ListView = findViewById(R.id.listViewProducts)
 
-        val productList = listOf(
-            Product("Téléphone", R.drawable.ic_phone),
-            Product("Casque Bluetooth", R.drawable.ic_headphones),
-            Product("Montre connectée", R.drawable.ic_watch),
-            Product("Chargeur USB", R.drawable.ic_charger),
-            Product("Accessoires", R.drawable.ic_accessories),
-            Product("Cosmétiques", R.drawable.ic_cosmetics)
-        )
+        // Charger les produits dynamiquement depuis le fichier JSON dans assets
+        val productList = lireProduitsDepuisJSON()
 
         val adapter = ProductAdapter(this, productList)
         listViewProducts.adapter = adapter
 
+        // Lorsqu’on clique sur un produit, on l’ajoute à la base de données SQLite panier
         listViewProducts.setOnItemClickListener { _, _, position, _ ->
             val selectedProduct = productList[position]
-            val message = "${getString(R.string.product_selected_prefix)}${selectedProduct.name}"
+
+            // Insertion dans la base SQLite
+            dbHelper.ajouterAuPanier(selectedProduct.name, selectedProduct.price)
+
+            // Confirmation par Toast
+            val message = String.format(getString(R.string.product_added_cart), selectedProduct.name)
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
 
@@ -43,6 +47,33 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun lireProduitsDepuisJSON(): List<Product> {
+        val products = mutableListOf<Product>()
+        try {
+            val inputStream = assets.open("produits.json")
+            val jsonString = inputStream.bufferedReader().use { it.readText() }
+
+            val jsonObject = JSONObject(jsonString)
+            val jsonArray = jsonObject.getJSONArray("produits")
+
+            for (i in 0 until jsonArray.length()) {
+                val item = jsonArray.getJSONObject(i)
+                val id = item.getInt("id")
+                val name = item.getString("nom")
+                val price = item.getInt("prix")
+                val imageName = item.getString("image")
+
+                val imageResId = resources.getIdentifier(imageName, "drawable", packageName)
+                val finalResId = if (imageResId != 0) imageResId else R.drawable.ic_phone
+
+                products.add(Product(id, name, price, finalResId))
+            }
+        } catch (e: Exception) {
+            Log.e(tag, "Erreur lecture produits.json", e)
+        }
+        return products
     }
 
     override fun onStart() {

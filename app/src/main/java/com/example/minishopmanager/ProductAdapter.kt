@@ -24,9 +24,11 @@ class ProductAdapter(
 
         val imgProduct: ImageView = view.findViewById(R.id.imgProduct)
         val tvProductName: TextView = view.findViewById(R.id.tvProductName)
+        val tvProductPrice: TextView = view.findViewById(R.id.tvProductPrice)
 
         imgProduct.setImageResource(product.imageResId)
         tvProductName.text = product.name
+        tvProductPrice.text = "${product.price} TND"
 
         return view
     }
