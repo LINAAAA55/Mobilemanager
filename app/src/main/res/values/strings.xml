@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">MiniShopManager</string>
+    <string name="btn_suivant">Suivant</string>
+    <string name="welcome_profile">Bienvenue sur l’écran Profil !</string>
+    <string name="hello_toast">Bonjour Lina !</string>
+</resources>
