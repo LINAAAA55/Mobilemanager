@@ -2,6 +2,7 @@ package com.example.minishopmanager
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class ProfileActivity : AppCompatActivity() {
@@ -12,6 +13,16 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         Log.d(tag, "onCreate call")
+
+        val tvWelcomeProfile: TextView = findViewById(R.id.tvWelcomeProfile)
+        val prefs = getSharedPreferences("MiniShopPrefs", MODE_PRIVATE)
+        val username = prefs.getString("USERNAME", "")
+
+        if (!username.isNullOrEmpty()) {
+            tvWelcomeProfile.text = getString(R.string.welcome_profile_user, username)
+        } else {
+            tvWelcomeProfile.text = getString(R.string.welcome_profile)
+        }
     }
 
     override fun onStart() {
