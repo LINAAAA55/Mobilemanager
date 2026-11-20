@@ -23,20 +23,20 @@ class MainActivity : AppCompatActivity() {
 
         val listViewProducts: ListView = findViewById(R.id.listViewProducts)
 
-        // Charger les produits dynamiquement depuis le fichier JSON dans assets
         val productList = lireProduitsDepuisJSON()
 
         val adapter = ProductAdapter(this, productList)
         listViewProducts.adapter = adapter
 
-        // Lorsqu’on clique sur un produit, on l’ajoute à la base de données SQLite panier
         listViewProducts.setOnItemClickListener { _, _, position, _ ->
             val selectedProduct = productList[position]
 
             // Insertion dans la base SQLite
             dbHelper.ajouterAuPanier(selectedProduct.name, selectedProduct.price)
 
-            // Confirmation par Toast
+            // Ajout au CartManager local
+            CartManager.add(selectedProduct.name, selectedProduct.price.toDouble())
+
             val message = String.format(getString(R.string.product_added_cart), selectedProduct.name)
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
@@ -45,6 +45,12 @@ class MainActivity : AppCompatActivity() {
         btnSuivant.setOnClickListener {
             Toast.makeText(this, getString(R.string.hello_toast), Toast.LENGTH_SHORT).show()
             val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        val btnCart: Button = findViewById(R.id.btnCart)
+        btnCart.setOnClickListener {
+            val intent = Intent(this, CartActivity::class.java)
             startActivity(intent)
         }
     }
@@ -72,6 +78,19 @@ class MainActivity : AppCompatActivity() {
             }
         } catch (e: Exception) {
             Log.e(tag, "Erreur lecture produits.json", e)
+        }
+
+        if (products.isEmpty()) {
+            products.addAll(
+                listOf(
+                    Product(1, "Téléphone", 1200, R.drawable.ic_phone),
+                    Product(2, "Casque Bluetooth", 150, R.drawable.ic_headphones),
+                    Product(3, "Montre connectée", 450, R.drawable.ic_watch),
+                    Product(4, "Chargeur USB", 45, R.drawable.ic_charger),
+                    Product(5, "Accessoires", 80, R.drawable.ic_accessories),
+                    Product(6, "Cosmétiques", 110, R.drawable.ic_cosmetics)
+                )
+            )
         }
         return products
     }

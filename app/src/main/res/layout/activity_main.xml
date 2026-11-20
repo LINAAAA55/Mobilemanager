@@ -17,7 +17,7 @@
         android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="@color/purple_700"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="4dp" />
 
     <TextView
         android:id="@+id/tvCatalogTitle"
@@ -28,7 +28,7 @@
         android:textSize="18sp"
         android:textStyle="italic"
         android:textColor="@color/black"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="12dp" />
 
     <ListView
         android:id="@+id/listViewProducts"
@@ -37,16 +37,31 @@
         android:layout_weight="1"
         android:divider="@android:color/transparent"
         android:dividerHeight="8dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="12dp" />
 
-    <Button
-        android:id="@+id/btnSuivant"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/btn_suivant"
-        android:textSize="16sp"
-        android:paddingHorizontal="24dp"
-        android:paddingVertical="10dp" />
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnCart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="Voir Panier"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btnSuivant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="@string/btn_suivant"
+            android:textSize="15sp" />
+    </LinearLayout>
 
 </LinearLayout>
