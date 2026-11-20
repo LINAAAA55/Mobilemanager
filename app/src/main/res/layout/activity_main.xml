@@ -1,67 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/catalog_bg"
-    android:padding="16dp"
+    android:fillViewport="true"
     tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/tvAppName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/app_name"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:textColor="@color/purple_700"
-        android:layout_marginBottom="4dp" />
-
-    <TextView
-        android:id="@+id/tvCatalogTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/catalog_title"
-        android:textSize="18sp"
-        android:textStyle="italic"
-        android:textColor="@color/black"
-        android:layout_marginBottom="12dp" />
-
-    <ListView
-        android:id="@+id/listViewProducts"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="8dp"
-        android:layout_marginBottom="12dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <Button
-            android:id="@+id/btnCart"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/tvAppName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            android:text="Voir Panier"
-            android:textSize="15sp" />
+            android:layout_gravity="center_horizontal"
+            android:text="@string/app_name"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/red_primary"
+            android:layout_marginBottom="2dp" />
 
-        <Button
-            android:id="@+id/btnSuivant"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/tvCatalogTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="8dp"
-            android:text="@string/btn_suivant"
-            android:textSize="15sp" />
+            android:layout_gravity="center_horizontal"
+            android:text="@string/catalog_title"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            android:textColor="@color/orange_primary"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/tvSectionAvailable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/section_available"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="8dp" />
+
+        <ListView
+            android:id="@+id/listViewProducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="8dp"
+            android:nestedScrollingEnabled="false"
+            android:layout_marginBottom="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="@color/red_light"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/tvSectionArrivesSoon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/section_arrives_soon"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/red_dark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/section_arrives_soon_subtitle"
+                android:textSize="13sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="8dp" />
+
+            <ListView
+                android:id="@+id/listViewArrivesSoon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="8dp"
+                android:nestedScrollingEnabled="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/btnCart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:text="@string/btn_cart"
+                android:textSize="15sp"
+                android:backgroundTint="@color/orange_primary" />
+
+            <Button
+                android:id="@+id/btnSuivant"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:text="@string/btn_suivant"
+                android:textSize="15sp"
+                android:backgroundTint="@color/red_primary" />
+        </LinearLayout>
+
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

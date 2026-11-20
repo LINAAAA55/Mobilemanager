@@ -36,5 +36,31 @@
       "prix": 110,
       "image": "ic_cosmetics"
     }
+  ],
+  "arrivesSoon": [
+    {
+      "id": 101,
+      "nom": "iPhone 16 Pro",
+      "prix": 4500,
+      "image": "ic_phone"
+    },
+    {
+      "id": 102,
+      "nom": "Samsung Galaxy S25 Ultra",
+      "prix": 4200,
+      "image": "ic_phone"
+    },
+    {
+      "id": 103,
+      "nom": "Google Pixel 9 Pro",
+      "prix": 3400,
+      "image": "ic_phone"
+    },
+    {
+      "id": 104,
+      "nom": "Xiaomi 15 Ultra",
+      "prix": 2900,
+      "image": "ic_phone"
+    }
   ]
 }
