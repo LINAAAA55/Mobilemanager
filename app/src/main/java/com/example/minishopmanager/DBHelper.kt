@@ -5,12 +5,15 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import java.security.MessageDigest
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         private const val DATABASE_NAME = "minishop.db"
-        private const val DATABASE_VERSION = 2
+        private const val DATABASE_VERSION = 3
 
         const val TABLE_PANIER = "panier"
         const val COLUMN_ID = "id"
@@ -22,6 +25,9 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         const val COLUMN_USERNAME = "username"
         const val COLUMN_EMAIL = "email"
         const val COLUMN_PASSWORD = "password"
+
+        const val TABLE_SALES = "sales"
+        const val TABLE_SALE_ITEMS = "sale_items"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -43,12 +49,35 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             )
         """.trimIndent()
         db.execSQL(createUsersTable)
+
+        createSalesTables(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS $TABLE_PANIER")
-        db.execSQL("DROP TABLE IF EXISTS $TABLE_USERS")
-        onCreate(db)
+        if (oldVersion < 3) createSalesTables(db)
+    }
+
+    private fun createSalesTables(db: SQLiteDatabase) {
+        db.execSQL(
+            """
+            CREATE TABLE IF NOT EXISTS $TABLE_SALES (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                date TEXT NOT NULL,
+                total REAL NOT NULL
+            )
+            """.trimIndent()
+        )
+        db.execSQL(
+            """
+            CREATE TABLE IF NOT EXISTS $TABLE_SALE_ITEMS (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                sale_id INTEGER NOT NULL,
+                name TEXT NOT NULL,
+                price REAL NOT NULL,
+                qty INTEGER NOT NULL
+            )
+            """.trimIndent()
+        )
     }
 
     fun ajouterAuPanier(nom: String, prix: Int): Long {
@@ -72,6 +101,60 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         cursor.close()
         db.close()
         return count
+    }
+
+    fun viderPanier() {
+        val db = this.writableDatabase
+        db.delete(TABLE_PANIER, null, null)
+        db.close()
+    }
+
+    fun createSale(items: List<CartItem>): Long {
+        val db = this.writableDatabase
+        db.beginTransaction()
+        try {
+            val saleValues = ContentValues().apply {
+                put("date", SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date()))
+                put("total", items.sumOf { it.price * it.qty })
+            }
+            val saleId = db.insert(TABLE_SALES, null, saleValues)
+            if (saleId <= 0) return -1
+            for (i in items) {
+                val v = ContentValues().apply {
+                    put("sale_id", saleId)
+                    put("name", i.name)
+                    put("price", i.price)
+                    put("qty", i.qty)
+                }
+                db.insert(TABLE_SALE_ITEMS, null, v)
+            }
+            db.setTransactionSuccessful()
+            return saleId
+        } finally {
+            db.endTransaction()
+        }
+    }
+
+    fun getSales(): List<Sale> {
+        val list = mutableListOf<Sale>()
+        val db = this.readableDatabase
+        db.rawQuery(
+            "SELECT s.id, s.date, s.total, " +
+                    "(SELECT GROUP_CONCAT(name || ' x' || qty, ', ') FROM $TABLE_SALE_ITEMS WHERE sale_id = s.id) " +
+                    "FROM $TABLE_SALES s ORDER BY s.id DESC", null
+        ).use { c ->
+            while (c.moveToNext()) {
+                list.add(Sale(c.getInt(0), c.getString(1), c.getDouble(2), c.getString(3) ?: ""))
+            }
+        }
+        return list
+    }
+
+    fun getTotalRevenue(): Double {
+        val db = this.readableDatabase
+        db.rawQuery("SELECT IFNULL(SUM(total), 0) FROM $TABLE_SALES", null).use { c ->
+            return if (c.moveToFirst()) c.getDouble(0) else 0.0
+        }
     }
 
     private fun hash(p: String): String =
