@@ -1,0 +1,36 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Orange Cart Handle and Main Curve -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#F57C00"
+        android:strokeWidth="7"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M 24,30 C 28,24 38,40 44,52 C 50,62 66,62 74,52 C 78,47 80,38 78,34" />
+
+    <!-- Cart Wheels -->
+    <path
+        android:fillColor="#F57C00"
+        android:pathData="M 40,70 A 5,5 0 1,1 40,70.01 Z" />
+    <path
+        android:fillColor="#F57C00"
+        android:pathData="M 66,70 A 5,5 0 1,1 66,70.01 Z" />
+
+    <!-- Dark Navy Arrow Swoosh -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#25225E"
+        android:strokeWidth="6"
+        android:strokeLineCap="round"
+        android:pathData="M 34,44 C 36,58 52,60 74,32 L 77,26" />
+
+    <!-- Arrowhead -->
+    <path
+        android:fillColor="#25225E"
+        android:pathData="M 68,24 L 79,25 L 75,36 Z" />
+</vector>
