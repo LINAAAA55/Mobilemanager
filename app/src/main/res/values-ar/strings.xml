@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">MiniShopManager</string>
+    <string name="login_subtitle">تسجيل الدخول - فضاء الطالب / العميل</string>
+    <string name="hint_username">اسم الطالب</string>
+    <string name="remember_me">تذكرني</string>
+    <string name="btn_login">تسجيل الدخول</string>
+    <string name="enter_username">الرجاء إدخال اسمك</string>
+    <string name="catalog_title">كتالوج المنتجات</string>
+    <string name="section_available">المنتجات المتوفرة</string>
+    <string name="section_arrives_soon">🔥 قريباً في المتجر</string>
+    <string name="section_arrives_soon_subtitle">الهواتف الذكية القادمة قريباً في المخزون!</string>
+    <string name="btn_suivant">عرض الملف الشخصي</string>
+    <string name="btn_cart">عرض السلة</string>
+    <string name="welcome_profile">مرحباً بك في صفحة الملف الشخصي!</string>
+    <string name="welcome_profile_user">مرحباً بك %1$s في صفحة الملف الشخصي!</string>
+    <string name="hello_toast">مرحباً لينا!</string>
+    <string name="product_added_cart">تم اختيار المنتج: %1$s (تمت الإضافة إلى السلة)</string>
+    <string name="product_selected_prefix">تم اختيار المنتج: </string>
+    <string name="arriving_soon_toast">🚀 %1$s سيصل قريباً إلى المخزون!</string>
+    <string name="badge_select">إختيار</string>
+    <string name="badge_soon">قريباً</string>
+
+    <!-- New Search, Category, Theme & Language Strings -->
+    <string name="search_hint">البحث عن منتج...</string>
+    <string name="cat_all">الكل</string>
+    <string name="cat_smartphones">هواتف</string>
+    <string name="cat_hightech">إلكترونيات</string>
+    <string name="cat_accessories">إكسسوارات</string>
+    <string name="cat_cosmetics">مستحضرات التجميل</string>
+    <string name="toggle_dark_mode">الوضع الداكن</string>
+    <string name="toggle_language">العربية</string>
+    <string name="no_products_found">لم يتم العثور على منتجات</string>
+</resources>

@@ -4,37 +4,43 @@
       "id": 1,
       "nom": "Téléphone",
       "prix": 1200,
-      "image": "ic_phone"
+      "image": "ic_phone",
+      "categorie": "Smartphones"
     },
     {
       "id": 2,
       "nom": "Casque Bluetooth",
       "prix": 150,
-      "image": "ic_headphones"
+      "image": "ic_headphones",
+      "categorie": "High-Tech"
     },
     {
       "id": 3,
       "nom": "Montre connectée",
       "prix": 450,
-      "image": "ic_watch"
+      "image": "ic_watch",
+      "categorie": "High-Tech"
     },
     {
       "id": 4,
       "nom": "Chargeur USB",
       "prix": 45,
-      "image": "ic_charger"
+      "image": "ic_charger",
+      "categorie": "Accessoires"
     },
     {
       "id": 5,
       "nom": "Accessoires",
       "prix": 80,
-      "image": "ic_accessories"
+      "image": "ic_accessories",
+      "categorie": "Accessoires"
     },
     {
       "id": 6,
       "nom": "Cosmétiques",
       "prix": 110,
-      "image": "ic_cosmetics"
+      "image": "ic_cosmetics",
+      "categorie": "Cosmétiques"
     }
   ],
   "arrivesSoon": [
@@ -42,25 +48,29 @@
       "id": 101,
       "nom": "iPhone 16 Pro",
       "prix": 4500,
-      "image": "ic_phone"
+      "image": "ic_phone",
+      "categorie": "Smartphones"
     },
     {
       "id": 102,
       "nom": "Samsung Galaxy S25 Ultra",
       "prix": 4200,
-      "image": "ic_phone"
+      "image": "ic_phone",
+      "categorie": "Smartphones"
     },
     {
       "id": 103,
       "nom": "Google Pixel 9 Pro",
       "prix": 3400,
-      "image": "ic_phone"
+      "image": "ic_phone",
+      "categorie": "Smartphones"
     },
     {
       "id": 104,
       "nom": "Xiaomi 15 Ultra",
       "prix": 2900,
-      "image": "ic_phone"
+      "image": "ic_phone",
+      "categorie": "Smartphones"
     }
   ]
 }

@@ -19,4 +19,15 @@
     <string name="arriving_soon_toast">🚀 %1$s arrivera bientôt en stock !</string>
     <string name="badge_select">Sélectionner</string>
     <string name="badge_soon">Bientôt</string>
+
+    <!-- New Search, Category, Theme & Language Strings -->
+    <string name="search_hint">Rechercher un produit…</string>
+    <string name="cat_all">Tous</string>
+    <string name="cat_smartphones">Smartphones</string>
+    <string name="cat_hightech">High-Tech</string>
+    <string name="cat_accessories">Accessoires</string>
+    <string name="cat_cosmetics">Cosmétiques</string>
+    <string name="toggle_dark_mode">Mode Sombre</string>
+    <string name="toggle_language">Français</string>
+    <string name="no_products_found">Aucun produit trouvé</string>
 </resources>
